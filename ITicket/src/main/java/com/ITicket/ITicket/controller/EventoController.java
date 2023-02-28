@@ -11,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -38,10 +37,20 @@ public class EventoController {
    @GetMapping("/Nuevo") 
    public String crearEventos(Model model){
        List<Precio> listaPrecio =  precioservice.listCountry();
-      model.addAttribute("evento", new Evento());
-      model.addAttribute("precio", listaPrecio);     
+         model.addAttribute("evento", new Evento());
+        model.addAttribute("precio", listaPrecio);   
         return "Nuevo";  
    }
+   @PostMapping("/Guardar")
+   public String guardarEvento(Evento Evento){
+       eventoservice.saveEvento(Evento);
+       return "redirect:/Concierto";
+   }
+   @GetMapping("/delete/{id}")
+   public String eliminarEvento(@PathVariable Long id){
+       eventoservice.delete(id);
+       return "redirect:/Concierto";
+   }
   
-  
+   
 }
