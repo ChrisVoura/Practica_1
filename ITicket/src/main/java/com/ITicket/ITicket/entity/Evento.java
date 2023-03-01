@@ -1,13 +1,10 @@
 
 package com.ITicket.ITicket.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 
@@ -21,10 +18,7 @@ public class Evento implements Serializable{
     private String fecha;
     private String lugar;
     private String capacidad;
-            
-    @ManyToOne
-    @JoinColumn(name="precio_id")
-    private Precio precio;
+    private double precio;
 
     public long getId() {
         return id;
@@ -58,14 +52,6 @@ public class Evento implements Serializable{
         this.lugar = lugar;
     }
 
-    public Precio getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Precio precio) {
-        this.precio = precio;
-    }
-
     public String getCapacidad() {
         return capacidad;
     }
@@ -73,6 +59,16 @@ public class Evento implements Serializable{
     public void setCapacidad(String capacidad) {
         this.capacidad = capacidad;
     }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+   
     
     
 }
