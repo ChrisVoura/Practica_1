@@ -55,7 +55,7 @@ public class EventoController {
   public String editarevento(@PathVariable("id") Long idEvento, Model model){
       Evento evento= eventoservice.getEventoById(idEvento);
         List<Precio> listaPrecio = precioservice.listCountry();
-       model.addAttribute("evento", new Evento());
+       model.addAttribute("evento", evento);
       model.addAttribute("precio", listaPrecio);
       return "Nuevo";
   }

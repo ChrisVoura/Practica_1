@@ -15,7 +15,8 @@
                 <div class=" justify-content-center card"> 
                     <h1 class="text-center">AGREGAR UN EVENTO</h1>
                     <div class="card-body">
-                        <form th:action="@{/Guardar}" th:object="${evento}" method="post" >      
+                        <form th:action="@{/Guardar}" th:object="${evento}" method="post" >     
+                              <input type="hidden" th:field="*{id}" th:value="${evento.id}"> 
                            <div class="from-group">
                                 <label>Artista :</label> 
                                 <input type="text" name="artista" th:field="*{nombre}" class="form-control" placeholder="Digite el nombre del artista" required>
