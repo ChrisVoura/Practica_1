@@ -3,12 +3,15 @@ package com.ITicket.ITicket.controller;
 
 
 import com.ITicket.ITicket.entity.Evento;
+import com.ITicket.ITicket.entity.Precio;
 import com.ITicket.ITicket.service.IEvento;
+import com.ITicket.ITicket.service.IPrecio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,6 +23,9 @@ public class EventoController {
      @Autowired
     private IEvento eventoservice;
 
+     @Autowired
+    private IPrecio precioservice;
+     
     @GetMapping("/Concierto")
     public String motrarEventos (Model model){
       List<Evento> listaEvento =  eventoservice.getAllEvento();
@@ -30,11 +36,13 @@ public class EventoController {
     
    @GetMapping("/Nuevo") 
    public String crearEventos(Model model){
+         List<Precio> listaPrecio =  precioservice.listCountry();
          model.addAttribute("evento", new Evento());  
+          model.addAttribute("precio", listaPrecio); 
         return "Nuevo";  
    }
    @PostMapping("/Guardar")
-   public String guardarEvento(Evento evento){
+   public String guardarEvento(@ModelAttribute Evento evento){
        eventoservice.saveEvento(evento);
        return "redirect:/Concierto";
    }
@@ -43,6 +51,13 @@ public class EventoController {
        eventoservice.delete(id);
        return "redirect:/Concierto";
    }
-  
+  @GetMapping("/editEvento/{id}")
+  public String editarevento(@PathVariable("id") Long idEvento, Model model){
+      Evento evento= eventoservice.getEventoById(idEvento);
+        List<Precio> listaPrecio = precioservice.listCountry();
+       model.addAttribute("evento", new Evento());
+      model.addAttribute("precio", listaPrecio);
+      return "Nuevo";
+  }
    
 }

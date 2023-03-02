@@ -25,7 +25,7 @@ public class EventoService implements IEvento{
 
     @Override
     public Evento getEventoById(long id) {
-        return eventorepository.findById(id).get();
+        return eventorepository.findById(id).orElse(null);
     }
 
     @Override

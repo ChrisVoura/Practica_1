@@ -29,7 +29,7 @@
                     <td th:text="${user.getLugar}"></td>             
                     <td th:text="${user.getFecha}"></td>           
                     <td th:text="${user.getCapacidad}"></td>                        
-                    <td th:text="${user.getPrecio}"></td>       
+                    <td th:text="${user.getPrecio.getPrecio}"></td>       
                     <td>                
                       <a th:href="@{/editEvento/{id}(id=${user.getId})}">Edit</a>        
                     </td>        

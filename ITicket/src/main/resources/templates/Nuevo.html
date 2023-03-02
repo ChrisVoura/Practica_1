@@ -15,8 +15,8 @@
                 <div class=" justify-content-center card"> 
                     <h1 class="text-center">AGREGAR UN EVENTO</h1>
                     <div class="card-body">
-                        <form th:action="@{/Guardar}" th:object="${evento}" method="post" >
-                            <div class="from-group">
+                        <form th:action="@{/Guardar}" th:object="${evento}" method="post" >      
+                           <div class="from-group">
                                 <label>Artista :</label> 
                                 <input type="text" name="artista" th:field="*{nombre}" class="form-control" placeholder="Digite el nombre del artista" required>
                             </div>
@@ -32,9 +32,12 @@
                                 <label>Capacidad :</label>
                                 <input type="text" name="capacidad" th:field="*{capacidad}" class="form-control" placeholder="Digite la capacidad del lugar" required>
                             </div>
-                             <div class="from-group">
-                                <label>Precio :</label>
-                                <input type="text" name="precio" th:field="*{precio}" class="form-control" placeholder="Digite el precio " required>
+                              <div class="from-group">
+                                <select th:field="*{precio}" clas="form-control form-control-sm col-md-6" id="precio" aria-describedby="emailHelp">
+                                    <option th:each="x:${precio}"
+                                            th:value="${x.id}"
+                                            th:text="${x.precio}"/>
+                                </select> 
                             </div>
                             <div class="box-footer">
                                 <button class="btn btn-succes"> Guardar</button>
